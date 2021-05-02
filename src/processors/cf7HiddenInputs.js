@@ -1,4 +1,3 @@
-import { connect } from "frontity";
 import HiddenInput from '../components/HiddenInput';
 
 const cf7HiddenInputs = {
@@ -19,4 +18,4 @@ const cf7HiddenInputs = {
 	}
 };
 
-export default connect( cf7HiddenInputs );
+export default cf7HiddenInputs;
