@@ -1,3 +1,4 @@
+import { connect } from "frontity";
 import Input from '../components/Input';
 
 const cf7Inputs = {
@@ -32,4 +33,4 @@ const cf7Inputs = {
 
 };
 
-export default cf7Inputs;
+export default connect( cf7Inputs );

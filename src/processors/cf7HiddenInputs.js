@@ -1,8 +1,10 @@
+import { connect } from "frontity";
 import HiddenInput from '../components/HiddenInput';
 
 const cf7HiddenInputs = {
 	name: "cf7HiddenInputs",
 	test: ({ node }) => node.component === "input" && /hidden/.test( node.props.type ) && /_wpcf7/.test( node.props.name ),
+	
 	processor: ({ node }) => {
 
 		const name  = ( 'undefined' === typeof ( node.props.name ) ) ? '' : node.props.name;
@@ -18,4 +20,4 @@ const cf7HiddenInputs = {
 	}
 };
 
-export default cf7HiddenInputs;
+export default connect( cf7HiddenInputs );

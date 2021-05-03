@@ -1,3 +1,4 @@
+import { connect } from "frontity";
 import Textarea from '../components/Textarea';
 
 const cf7Textarea = {
@@ -32,4 +33,4 @@ const cf7Textarea = {
 
 };
 
-export default cf7Textarea;
+export default connect( cf7Textarea );
