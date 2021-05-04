@@ -10,4 +10,4 @@ const cf7Spans = {
 	}
 };
 
-export default connect( cf7Spans );
+export default cf7Spans;

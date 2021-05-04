@@ -1,4 +1,3 @@
-import { connect } from "frontity";
 import Select from '../components/Select';
 
 const cf7Select = {
@@ -48,4 +47,4 @@ const cf7Select = {
 
 };
 
-export default connect( cf7Select );
+export default cf7Select;

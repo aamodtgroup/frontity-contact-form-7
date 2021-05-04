@@ -1,4 +1,3 @@
-import { connect } from "frontity";
 import Form from "./../components/Form";
 
 const cf7Form = {
@@ -14,4 +13,4 @@ const cf7Form = {
 	}
 };
 
-export default connect( cf7Form );
+export default cf7Form;
