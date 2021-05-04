@@ -1,3 +1,4 @@
+import { connect } from "frontity";
 import Span from './../components/Span';
 
 const cf7Spans = {

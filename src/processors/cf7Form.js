@@ -2,9 +2,7 @@ import Form from "./../components/Form";
 
 const cf7Form = {
 	name: "cf7Form",
-	test: ({ node }) =>
-
-		node.component === "form" && /wpcf7-form/.test( node.props.className ),
+	test: ({ node }) => node.component === "form" && /wpcf7-form/.test( node.props.className ),
 
 	processor: ({ node }) => {
 
