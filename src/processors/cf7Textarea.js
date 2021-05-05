@@ -1,6 +1,6 @@
 import Textarea from '../components/Textarea';
 
-const cf7Textarea = {
+export const cf7Textarea = {
 
 	name: "cf7Textarea",
 	test: ({ node }) => node.component === "textarea" && /wpcf7-form-control/.test( node.props.className ),
@@ -31,5 +31,3 @@ const cf7Textarea = {
 	}
 
 };
-
-export default cf7Textarea;

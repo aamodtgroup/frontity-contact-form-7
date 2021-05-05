@@ -1,6 +1,6 @@
 import Input from '../components/Input';
 
-const cf7Inputs = {
+export const cf7Inputs = {
 
 	name: "cf7Inputs",
 	test: ({ node }) => node.component === "input" && /wpcf7-form-control/.test( node.props.className ),
@@ -31,5 +31,3 @@ const cf7Inputs = {
 	}
 
 };
-
-export default cf7Inputs;
