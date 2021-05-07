@@ -1,22 +1,19 @@
 # Frontity Contact Form 7
 
-Contact Form 7 package for Frontity.
+Contact Form 7 package for [Frontity](https://frontity.org).
 
 # How does it work?
 
-1. You need to create a page in your WordPress site (if you don't already have one) that contains a CF7 shortcode.
+1. You need to create a page in your WordPress site (if you don't already have one) that contains a CF7 shortcode or Gutenberg block.
 1. Install the Frontity Contact Form 7 package as shown in the Installation steps below.
-1. Visit that page in Frontity and the package will automatically render all the CF7
-   forms that are present, including other content on the page.
-1. On successful form submission, the email goes to the admin (if CF7 email settings are configured on your WordPress site). Errors are shown as well if the fields are invalid.
-
-> It uses html processors to render the CF7 form.
+1. Visit that page in Frontity and the package will automatically render all the CF7 forms that are present, including other content on the page.
+1. On successful form submission, the email goes to the recipient set in the form settings in WP (if CF7 email settings are configured on your WordPress site). Errors are shown as well if the fields are invalid.
 
 # Features
 
 1. All the CF7 forms on the page will work.
-2. You can also use it for multiple pages.
-3. Built with React and Frontity, so its fast and performant.
+1. You can also use it for multiple pages.
+1. Built with React and Frontity, so its fast and performant.
 
 # Installation
 
@@ -36,7 +33,7 @@ That's it! The package doesn't need any settings. You should be able to see the 
 
 ## Credits
 
-- Build with love :blue_heart:, using [Frontity's](https://frontity.org)
+- Build with love :blue_heart:, using [Frontity](https://frontity.org)
 
 ## Authors
 
@@ -46,7 +43,7 @@ That's it! The package doesn't need any settings. You should be able to see the 
 ## Contributors
 
 1. [Luis Herranz](https://twitter.com/luisherranz) - Leed Developer [@frontity](https://twitter.com/frontity)
-1. [Kasper Aamodt](https://twitter.com/kasperaamodt) - Developer [@aamodtgroup](https://twitter.com/aamodtgroup)
+1. [Kasper Aamodt](https://twitter.com/kasperaamodt) - Owner and developer [@aamodtgroup](https://twitter.com/aamodtgroup)
 
 ## License
 
