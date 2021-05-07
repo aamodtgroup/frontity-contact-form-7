@@ -36,6 +36,7 @@ const Textarea = ( { state, actions, inputProps } ) => {
 		<textarea
 			name={ inputProps.name }
 			className={ inputProps.className }
+			id={ inputProps.id }
 			aria-invalid={ inputProps.ariaInvalid }
 			aria-required={ inputProps.ariaRequired }
 			cols={ inputProps.cols }

@@ -6,8 +6,8 @@ export const cf7HiddenInputs = {
 	
 	processor: ({ node }) => {
 
-		const name  = ( 'undefined' === typeof ( node.props.name ) ) ? '' : node.props.name;
-		const value = ( 'undefined' === typeof ( node.props.value ) ) ? '' : node.props.value;
+		const name  = ( 'undefined' === typeof ( node.props.name ) ) ? null : node.props.name;
+		const value = ( 'undefined' === typeof ( node.props.value ) ) ? null : node.props.value;
 
 		node.props.inputProps = {
 			name: name,

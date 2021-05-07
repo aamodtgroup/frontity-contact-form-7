@@ -10,7 +10,7 @@ const MyForm = {
 
 	libraries: {
 		html2react: {
-			processors
+			processors,
 		}
 	},
 
@@ -24,7 +24,6 @@ const MyForm = {
 			 * @return {Function}
 			 */
 			initForm: ( { state } ) => ( id ) => {
-
 				if ( !state.cf7.forms[ id ] ) {
 					state.cf7.forms[ id ] = { inputVals: {} };
 				}

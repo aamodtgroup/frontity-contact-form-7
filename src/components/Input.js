@@ -38,6 +38,7 @@ const Input = ( { state, actions, inputProps } ) => {
 		<input
 			name={ inputProps.name }
 			className={ inputProps.className }
+			id={ inputProps.id }
 			aria-invalid={ inputProps.ariaInvalid }
 			aria-required={ inputProps.ariaRequired }
 			size={ inputProps.size }
