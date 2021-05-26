@@ -16,7 +16,8 @@
   "homepage": "https://aamodtgroup.com",
   "license": "GPL-2.0-or-later",
   "repository": {
-    "url": "git://github.com/aamodtgroup/frontity-contact-form-7.git."
+    "type": "git",
+    "url": "https://github.com/aamodtgroup/frontity-contact-form-7"
   },
   "bugs": {
     "url": "https://github.com/aamodtgroup/frontity-contact-form-7/issues"
@@ -27,7 +28,6 @@
     "@frontity/html2react": "^1.6.2"
   },
   "publishConfig": {
-    "cache": "~/.npm",
-    "access": "public"
+    "registry": "https://npm.pkg.github.com/aamodtgroup"
   }
 }
