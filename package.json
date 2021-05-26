@@ -28,6 +28,7 @@
     "@frontity/html2react": "^1.6.2"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/aamodtgroup"
+    "cache": "~/.npm",
+    "access": "public"
   }
 }
