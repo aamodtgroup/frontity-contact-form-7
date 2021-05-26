@@ -12,7 +12,7 @@ export const cf7Inputs = {
 		const name         = ( 'undefined' === typeof ( node.props.name ) ) ? null : node.props.name;
 		const size         = ( 'undefined' === typeof ( node.props.size ) ) ? null : node.props.size;
 		const type         = ( 'undefined' === typeof ( node.props.type ) ) ? null : node.props.type;
-		const value        = ( 'undefined' === typeof ( node.props.value ) ) ? null : node.props.value;
+		const value        = ( 'undefined' === typeof ( node.props.value ) ) ? '' : node.props.value;
 		const placeholder  = ( 'undefined' === typeof ( node.props.placeholder ) ) ? null : node.props.placeholder;
 
 		node.props.inputProps = {

@@ -1,7 +1,6 @@
 import Textarea from '../components/Textarea';
 
 export const cf7Textarea = {
-
 	name: "cf7Textarea",
 	test: ({ node }) => node.component === "textarea" && /wpcf7-form-control/.test( node.props.className ),
 	processor: ({ node }) => {
@@ -13,7 +12,7 @@ export const cf7Textarea = {
 		const name         = ( 'undefined' === typeof ( node.props.name ) ) ? null : node.props.name;
 		const cols         = ( 'undefined' === typeof ( node.props.cols ) ) ? null : node.props.cols;
 		const rows         = ( 'undefined' === typeof ( node.props.rows ) ) ? null : node.props.rows;
-		const value        = ( 'undefined' === typeof ( node.props.value ) ) ? null : node.props.value;
+		const value        = ( 'undefined' === typeof ( node.props.value ) ) ? '' : node.props.value;
 		const placeholder  = ( 'undefined' === typeof ( node.props.placeholder ) ) ? null : node.props.placeholder;
 
 		node.props.inputProps = {
@@ -31,5 +30,4 @@ export const cf7Textarea = {
 		node.component = Textarea;
 		return node;
 	}
-
 };
