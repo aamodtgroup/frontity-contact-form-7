@@ -25,9 +25,9 @@ const Message = ( { state } ) => {
 	const getMessage = () => {
 
 		if ( 'sent' === responseInfo.status && typeof responseInfo.message === 'string' ) {
-			return <SuccessMessage>{ responseInfo.message }</SuccessMessage>
+			return <SuccessMessage className="success-message">{ responseInfo.message }</SuccessMessage>
 		} else if ( 'failed' === responseInfo.status && typeof responseInfo.validationErrors === 'string' ) {
-			return <ErrorMessage>{ responseInfo.validationErrors }</ErrorMessage>
+			return <ErrorMessage className="error-message">{ responseInfo.validationErrors }</ErrorMessage>
 		} else {
 			return '';
 		}
