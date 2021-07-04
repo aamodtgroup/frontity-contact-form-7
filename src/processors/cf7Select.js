@@ -1,9 +1,9 @@
-import Input from "../components/Input";
+import Select from "../components/Select";
 
-export const cf7Inputs = {
-    name: "cf7Inputs",
+export const cf7Select = {
+    name: "cf7Select",
     test: ({ node }) =>
-        node.component === "input" &&
+        node.component === "select" &&
         /wpcf7-form-control/.test(node.props.className),
     processor: ({ node }) => {
         const ariaInvalid =
@@ -21,16 +21,19 @@ export const cf7Inputs = {
         const id = "undefined" === typeof node.props.id ? null : node.props.id;
         const name =
             "undefined" === typeof node.props.name ? null : node.props.name;
-        const size =
-            "undefined" === typeof node.props.size ? null : node.props.size;
-        const type =
-            "undefined" === typeof node.props.type ? null : node.props.type;
         const value =
-            "undefined" === typeof node.props.value ? "" : node.props.value;
-        const placeholder =
-            "undefined" === typeof node.props.placeholder
+            "undefined" === typeof node.children[0].props.value
                 ? null
-                : node.props.placeholder;
+                : node.children[0].props.value;
+        const optionChildrens =
+            "undefined" === typeof node.children ? null : node.children;
+
+        const options = optionChildrens.map((item) => {
+            return {
+                label: item.children[0].content,
+                value: item.props.value,
+            };
+        });
 
         node.props.inputProps = {
             ariaInvalid: ariaInvalid,
@@ -38,13 +41,11 @@ export const cf7Inputs = {
             className: className,
             id: id,
             name: name,
-            size: size,
-            type: type,
             value: value,
-            placeholder: placeholder,
+            options: options,
         };
 
-        node.component = Input;
+        node.component = Select;
         return node;
     },
 };
