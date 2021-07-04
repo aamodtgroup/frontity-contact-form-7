@@ -26,7 +26,7 @@ export const cf7Select = {
                 ? null
                 : node.children[0].props.value;
         const optionChildrens =
-            "undefined" === typeof node.children ? [] : node.children;
+            "undefined" === typeof node.children ? null : node.children;
 
         const options = optionChildrens.map((item) => {
             return {

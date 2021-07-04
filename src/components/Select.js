@@ -47,6 +47,7 @@ const Select = ({ state, actions, inputProps }) => {
             aria-invalid={inputProps.ariaInvalid}
             aria-required={inputProps.ariaRequired}
             onChange={onChange}
+            value={state.cf7.forms[id].inputVals[inputName]}
         >
             {inputProps.options.map((item, index) => (
                 <option key={index} value={item.value}>
