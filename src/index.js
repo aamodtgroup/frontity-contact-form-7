@@ -1,144 +1,153 @@
 import processors from "./processors";
 
 const MyForm = {
+    state: {
+        cf7: {
+            forms: {},
+        },
+    },
 
-	state: {
-		cf7: {
-			forms: {}
-		}
-	},
+    libraries: {
+        html2react: {
+            processors,
+        },
+    },
 
-	libraries: {
-		html2react: {
-			processors,
-		}
-	},
+    actions: {
+        cf7: {
+            /**
+             * Initialize the form input object in the state.
+             *
+             * @param {Object} state State.
+             * @return {Function}
+             */
+            initForm:
+                ({ state }) =>
+                (id) => {
+                    if (!state.cf7.forms[id]) {
+                        state.cf7.forms[id] = { inputVals: {} };
+                    }
+                },
 
-	actions: {
-		cf7: {
+            /**
+             * Initialize the input values in the state.
+             *
+             * @param {Object} state State.
+             * @return {Function}
+             */
+            initInput:
+                ({ state }) =>
+                ({ id, inputName }) => {
+                    state.cf7.forms[id].inputVals =
+                        "" !== inputName ? { [inputName]: "" } : {};
+                },
 
-			/**
-			 * Initialize the form input object in the state.
-			 *
-			 * @param {Object} state State.
-			 * @return {Function}
-			 */
-			initForm: ( { state } ) => ( id ) => {
-				if ( !state.cf7.forms[ id ] ) {
-					state.cf7.forms[ id ] = { inputVals: {} };
-				}
-			},
+            /**
+             * Handle on change event when user enters values in the form.
+             *
+             * Set the input value entered by the user in the state.
+             *
+             * @param {Object} state State.
+             * @return {Function}
+             */
+            changeInputValue:
+                ({ state }) =>
+                ({ id, inputName, value }) => {
+                    state.cf7.forms[id].inputVals[inputName] = value;
+                },
 
-			/**
-			 * Initialize the input values in the state.
-			 *
-			 * @param {Object} state State.
-			 * @return {Function}
-			 */
-			initInput: ( { state } ) => ( { id, inputName } ) => {
-				state.cf7.forms[ id ].inputVals = ( '' !== inputName ) ? { [ inputName ]: '' } : {};
-			},
+            /**
+             * Add hidden input values.
+             *
+             * @param {Object} state State.
+             * @return {Function}
+             */
+            addHiddenInputs:
+                ({ state }) =>
+                ({ id, inputName, value }) => {
+                    state.cf7.forms[id].inputVals[inputName] = value;
+                },
 
-			/**
-			 * Handle on change event when user enters values in the form.
-			 *
-			 * Set the input value entered by the user in the state.
-			 *
-			 * @param {Object} state State.
-			 * @return {Function}
-			 */
-			changeInputValue: ( { state } ) => ( { id, inputName, value } ) => {
-				state.cf7.forms[ id ].inputVals[ inputName ] = value;
-			},
+            /**
+             * Handle form submit.
+             *
+             * @param {Object} state State.
+             * @return {Function}
+             */
+            sendForm:
+                ({ state }) =>
+                async (id) => {
+                    const myData = state.cf7.forms[id].inputVals;
 
-			/**
-			 * Add hidden input values.
-			 *
-			 * @param {Object} state State.
-			 * @return {Function}
-			 */
-			addHiddenInputs: ( { state } ) => ( { id, inputName, value } ) => {
-				state.cf7.forms[ id ].inputVals[ inputName ] = value;
-			},
+                    // Create new form data to send the post request with form data.
+                    let formData = new FormData();
 
-			/**
-			 * Handle form submit.
-			 *
-			 * @param {Object} state State.
-			 * @return {Function}
-			 */
-			sendForm: ( { state } ) => async id => {
+                    Object.keys(myData).forEach((key) => {
+                        formData.append(key, myData[key]);
+                    });
 
-				const myData = state.cf7.forms[ id ].inputVals;
+                    // CF7 REST API URL.
+                    const url = `${state.source.api}contact-form-7/v1/contact-forms/${id}/feedback`;
 
-				// Create new form data to send the post request with form data.
-				let formData = new FormData();
+                    // Post Request.
+                    const res = await fetch(url, {
+                        method: "POST",
+                        body: formData,
+                    });
+                    const body = await res.json();
+                    let invalidFieldsObj = {};
 
-				Object.keys( myData ).forEach( ( key ) => {
-					formData.append( key, myData[ key ] );
-				} );
+                    // Set loading to false for the message to show
+                    state.cf7.forms[id].loading = false;
 
-				// CF7 REST API URL.
-				const url = `${state.source.api}contact-form-7/v1/contact-forms/${ id }/feedback`;
+                    // Clear previous errors if any
+                    if (state.cf7.forms[id].invalidFields) {
+                        state.cf7.forms[id].invalidFields = {};
+                    }
 
-				// Post Request.
-				const res  = await fetch( url, {
-					method: 'POST',
-					body: formData
-				} );
-				const body = await res.json();
-				let invalidFieldsObj = {};
+                    /**
+                     * Populate state with the errors, or thank-you message...
+                     */
+                    if ("mail_sent" === body.status) {
+                        state.cf7.forms[id].status = "sent";
+                        state.cf7.forms[id].message = body.message;
 
-				// Set loading to false for the message to show
-				state.cf7.forms[ id ].loading = false;
+                        // Once the email is sent, clear the form fields.
+                        state.cf7.forms[id].inputVals = {};
+                        // Clear message after 5s
+                        setTimeout(() => {
+                            state.cf7.forms[id].message = {};
+                        }, 5000);
+                    } else if (
+                        "validation_failed" === body.status ||
+                        "mail_failed" === body.status
+                    ) {
+                        if (body.invalid_fields) {
+                            body.invalid_fields.forEach((item) => {
+                                let errorKey = item.into.replace(
+                                    "span.wpcf7-form-control-wrap.",
+                                    ""
+                                );
+                                if (errorKey) {
+                                    invalidFieldsObj[errorKey] = item.message;
+                                }
+                            });
 
-				// Clear previous errors if any
-				if ( state.cf7.forms[ id ].invalidFields ) {
-					state.cf7.forms[ id ].invalidFields = {};
-				}
+                            state.cf7.forms[id].invalidFields =
+                                invalidFieldsObj;
+                        }
 
-				/**
-				 * Populate state with the errors, or thank-you message...
-				 */
-				if ( 'mail_sent' === body.status ) {
+                        state.cf7.forms[id].status = "failed";
 
-					state.cf7.forms[ id ].status  = "sent";
-					state.cf7.forms[ id ].message = body.message;
-
-					// Once the email is sent, clear the form fields.
-					state.cf7.forms[ id ].inputVals = {};
-					// Clear message after 5s
-					setTimeout(() => { state.cf7.forms[ id ].message = {}; }, 5000);
-
-				} else if ( 'validation_failed' === body.status || 'mail_failed' === body.status ) {
-
-					if(body.invalid_fields){
-						body.invalid_fields.forEach( item => {
-
-							let errorKey = item.into.replace('span.wpcf7-form-control-wrap.','');
-							if ( errorKey ) {
-								invalidFieldsObj[errorKey] = item.message;
-							}
-
-						} );
-
-						state.cf7.forms[ id ].invalidFields = invalidFieldsObj;
-					}
-
-					state.cf7.forms[ id ].status = "failed";
-
-					/**
-					 * Populate errors from the response so React components
-					 * can see them and re-render appropriately
-					 */
-					state.cf7.forms[ id ].validationErrors = body.message;
-
-				}
-
-			}
-		}
-	}
+                        /**
+                         * Populate errors from the response so React components
+                         * can see them and re-render appropriately
+                         */
+                        state.cf7.forms[id].validationErrors = body.message;
+                    }
+                },
+        },
+    },
 };
-
 
 export default MyForm;

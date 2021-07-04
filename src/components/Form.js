@@ -13,38 +13,43 @@ import Message from "./Message";
  *
  * @return {*}
  */
-const Form = ( { state, actions, id, children, className, method } ) => {
+const Form = ({ state, actions, id, children, className, method }) => {
+    actions.cf7.initForm(id);
 
-	actions.cf7.initForm( id );
+    /**
+     * Form onSubmit event handler.
+     *
+     * @param {Object} event Event.
+     */
+    const handleOnSubmit = (event) => {
+        event.preventDefault();
 
-	/**
-	 * Form onSubmit event handler.
-	 *
-	 * @param {Object} event Event.
-	 */
-	const handleOnSubmit = ( event ) => {
+        // Set the loading to true first to show processing while the request is ongoing.
+        state.cf7.forms[id].loading = true;
 
-		event.preventDefault();
+        // Call the action sendform that will get the form data from state using the form id.
+        actions.cf7.sendForm(id);
+    };
 
-		// Set the loading to true first to show processing while the request is ongoing.
-		state.cf7.forms[ id ].loading = true;
-
-		// Call the action sendform that will get the form data from state using the form id.
-		actions.cf7.sendForm( id );
-
-	};
-
-	return (
-		<FormIdContext.Provider value={ id }>
-			<FormElement method={ method } onSubmit={ handleOnSubmit } className={ className }>
-				{ children }
-			</FormElement>
-			{ state.cf7.forms[ id ].loading ? <Processing>Processing...</Processing> : <Message /> }
-		</FormIdContext.Provider>
-	)
+    return (
+        <FormIdContext.Provider value={id}>
+            <FormElement
+                method={method}
+                onSubmit={handleOnSubmit}
+                className={className}
+            >
+                {children}
+            </FormElement>
+            {state.cf7.forms[id].loading ? (
+                <Processing>Processing...</Processing>
+            ) : (
+                <Message />
+            )}
+        </FormIdContext.Provider>
+    );
 };
 
 const FormElement = styled.form``;
 const Processing = styled.div``;
 
-export default connect( Form );
+export default connect(Form);

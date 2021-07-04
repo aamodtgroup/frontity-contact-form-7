@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { connect, styled } from "frontity";
 import FormIdContext from "./../context/FormIdContext";
 
@@ -12,30 +12,40 @@ import FormIdContext from "./../context/FormIdContext";
  * @return {*|string}
  *
  */
-const Message = ( { state } ) => {
+const Message = ({ state }) => {
+    const id = React.useContext(FormIdContext);
+    const responseInfo = state.cf7.forms[id];
 
-	const id           = React.useContext( FormIdContext );
-	const responseInfo = state.cf7.forms[ id ];
+    /**
+     * Get the error or success message
+     *
+     * @return {string|*}
+     */
+    const getMessage = () => {
+        if (
+            "sent" === responseInfo.status &&
+            typeof responseInfo.message === "string"
+        ) {
+            return (
+                <SuccessMessage className="success-message">
+                    {responseInfo.message}
+                </SuccessMessage>
+            );
+        } else if (
+            "failed" === responseInfo.status &&
+            typeof responseInfo.validationErrors === "string"
+        ) {
+            return (
+                <ErrorMessage className="error-message">
+                    {responseInfo.validationErrors}
+                </ErrorMessage>
+            );
+        } else {
+            return "";
+        }
+    };
 
-	/**
-	 * Get the error or success message
-	 *
-	 * @return {string|*}
-	 */
-	const getMessage = () => {
-
-		if ( 'sent' === responseInfo.status && typeof responseInfo.message === 'string' ) {
-			return <SuccessMessage className="success-message">{ responseInfo.message }</SuccessMessage>
-		} else if ( 'failed' === responseInfo.status && typeof responseInfo.validationErrors === 'string' ) {
-			return <ErrorMessage className="error-message">{ responseInfo.validationErrors }</ErrorMessage>
-		} else {
-			return '';
-		}
-
-	};
-
-	return getMessage();
-
+    return getMessage();
 };
 
 const SuccessMessage = styled.div`
@@ -48,4 +58,4 @@ const ErrorMessage = styled.div`
     padding: 0.75rem 1.25rem;
 `;
 
-export default connect( Message );
+export default connect(Message);
