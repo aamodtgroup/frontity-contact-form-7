@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import FormIdContext from "../context/FormIdContext";
 import { connect, styled } from "frontity";
 
@@ -12,10 +12,15 @@ import { connect, styled } from "frontity";
  *
  * @return {*}
  */
-const Span = ({ state, children, className, spanKey }) => {
+const Span = ({ state, actions, children, className, spanKey }) => {
     const id = React.useContext(FormIdContext);
-
     let errorMessage = "";
+
+    if (true === state.cf7.resetOnChange || true === state.theme.resetOnChange ) {
+        useEffect(() => {
+            actions.cf7.resetFields({ id })
+        }, [state.router.link])
+    }
 
     if ("undefined" !== typeof state.cf7.forms[id].invalidFields) {
         errorMessage =

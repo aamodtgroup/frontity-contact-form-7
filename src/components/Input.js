@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import FormIdContext from "../context/FormIdContext";
 import { connect } from "frontity";
 
@@ -15,6 +15,12 @@ const Input = ({ state, actions, inputProps }) => {
     const id = useContext(FormIdContext);
     const inputName = inputProps.name;
     const placeholder = inputProps.placeholder;
+
+    if (true === state.cf7.resetOnChange) {
+        useEffect(() => {
+            actions.cf7.resetFields({ id })
+        }, [state.router.link])
+    }
 
     if ("undefined" === typeof state.cf7.forms[id].inputVals[inputName]) {
         actions.cf7.changeInputValue({

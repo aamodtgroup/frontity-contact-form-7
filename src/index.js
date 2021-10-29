@@ -4,13 +4,13 @@ const MyForm = {
     state: {
         cf7: {
             forms: {},
-        },
+        }
     },
 
     libraries: {
         html2react: {
             processors,
-        },
+        }
     },
 
     actions: {
@@ -66,6 +66,15 @@ const MyForm = {
                 ({ state }) =>
                 ({ id, inputName, value }) => {
                     state.cf7.forms[id].inputVals[inputName] = value;
+                },
+
+            resetFields:
+                ({ state }) =>
+                ({ id }) => {
+                    state.cf7.forms[id].inputVals = {};
+                    state.cf7.forms[id].invalidFields = {};
+                    state.cf7.forms[id].status = {};
+                    state.cf7.forms[id].message = {};
                 },
 
             /**
