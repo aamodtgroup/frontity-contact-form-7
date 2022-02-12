@@ -1,11 +1,10 @@
-import Input from "../components/Input";
+import File from "../components/File";
 
-export const cf7Inputs = {
-    name: "cf7Inputs",
+export const cf7File = {
+    name: "cf7File",
     test: ({ node }) =>
         node.component === "input" &&
-        /wpcf7-form-control/.test(node.props.className) &&
-        !/wpcf7-file/.test(node.props.className),
+        /wpcf7-file/.test(node.props.className),
     processor: ({ node }) => {
         const ariaInvalid =
             "undefined" === typeof node.props["aria-invalid"]
@@ -26,6 +25,8 @@ export const cf7Inputs = {
             "undefined" === typeof node.props.size ? null : node.props.size;
         const type =
             "undefined" === typeof node.props.type ? null : node.props.type;
+        const accept =
+            "undefined" === typeof node.props.accept ? null : node.props.accept;
         const value =
             "undefined" === typeof node.props.value ? "" : node.props.value;
         const placeholder =
@@ -43,9 +44,10 @@ export const cf7Inputs = {
             type: type,
             value: value,
             placeholder: placeholder,
+            accept: accept
         };
 
-        node.component = Input;
+        node.component = File;
         return node;
     },
 };
