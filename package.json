@@ -1,7 +1,8 @@
 {
   "name": "@aamodtgroup/frontity-contact-form-7",
-  "version": "0.2.10",
+  "version": "0.2.12",
   "description": "Contact Form 7 extension for Frontity theme.",
+  "main": "src/index.js",
   "keywords": [
     "Frontity",
     "Contact",
