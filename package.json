@@ -1,34 +1,34 @@
 {
-  "name": "@aamodtgroup/frontity-contact-form-7",
-  "version": "1.0.0-canary",
-  "description": "Contact Form 7 extension for Frontity theme.",
-  "keywords": [
-    "Frontity",
-    "Contact",
-    "form",
-    "7",
-    "cf7",
-    "WordPress",
-    "Reactjs",
-    "react",
-    "frontity-cf7"
-  ],
-  "homepage": "https://aamodtgroup.com",
-  "license": "GPL-2.0-or-later",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/aamodtgroup/frontity-contact-form-7"
-  },
-  "bugs": {
-    "url": "https://github.com/aamodtgroup/frontity-contact-form-7/issues"
-  },
-  "author": "Aamodt Group",
-  "peerDependencies": {
-    "frontity": "^1.15.0",
-    "@frontity/html2react": "^1.6.2"
-  },
-  "publishConfig": {
-    "cache": "~/.npm",
-    "access": "public"
-  }
+	"name": "@aamodtgroup/frontity-contact-form-7",
+	"version": "1.0.0",
+	"description": "Contact Form 7 extension for Frontity theme.",
+	"keywords": [
+		"Frontity",
+		"Contact",
+		"form",
+		"7",
+		"cf7",
+		"WordPress",
+		"Reactjs",
+		"react",
+		"frontity-cf7"
+	],
+	"homepage": "https://aamodtgroup.com",
+	"license": "GPL-2.0-or-later",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/aamodtgroup/frontity-contact-form-7"
+	},
+	"bugs": {
+		"url": "https://github.com/aamodtgroup/frontity-contact-form-7/issues"
+	},
+	"author": "Aamodt Group",
+	"peerDependencies": {
+		"frontity": "^1.15.0",
+		"@frontity/html2react": "^1.6.2"
+	},
+	"publishConfig": {
+		"cache": "~/.npm",
+		"access": "public"
+	}
 }
