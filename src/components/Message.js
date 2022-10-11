@@ -15,7 +15,6 @@ import FormIdContext from './../context/FormIdContext';
 const Message = ({ state }) => {
 	const id = React.useContext(FormIdContext);
 	const responseInfo = state.cf7.forms[id];
-	console.log(responseInfo);
 
 	/**
 	 * Get the error or success message
