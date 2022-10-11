@@ -1,5 +1,5 @@
-import React from "react";
-import { connect } from "frontity";
+import React from 'react';
+import { connect } from 'frontity';
 
 /**
  * Input Component.
@@ -10,14 +10,14 @@ import { connect } from "frontity";
  * @return {*}
  */
 const Akismet = ({ inputProps }) => {
-    return (
-        <input
-            type={inputProps.type}
-            id={inputProps.id}
-            name={inputProps.name}
-            value={inputProps.value}
-        />
-    );
+	return (
+		<input
+			type={inputProps.type}
+			id={inputProps.id}
+			name={inputProps.name}
+			value={inputProps.value}
+		/>
+	);
 };
 
 export default connect(Akismet);

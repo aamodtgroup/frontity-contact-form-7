@@ -1,6 +1,6 @@
-import React from "react";
-import { connect, styled } from "frontity";
-import FormIdContext from "./../context/FormIdContext";
+import React from 'react';
+import { connect, styled } from 'frontity';
+import FormIdContext from './../context/FormIdContext';
 
 /**
  * Message component
@@ -13,59 +13,59 @@ import FormIdContext from "./../context/FormIdContext";
  *
  */
 const Message = ({ state }) => {
-    const id = React.useContext(FormIdContext);
-    const responseInfo = state.cf7.forms[id];
-    console.log(responseInfo);
+	const id = React.useContext(FormIdContext);
+	const responseInfo = state.cf7.forms[id];
+	console.log(responseInfo);
 
-    /**
-     * Get the error or success message
-     *
-     * @return {string|*}
-     */
-    const getMessage = () => {
-        if (
-            "sent" === responseInfo.status &&
-            typeof responseInfo.message === "string"
-        ) {
-            return (
-                <SuccessMessage className="success-message">
-                    {responseInfo.message}
-                </SuccessMessage>
-            );
-        } else if (
-            ("failed" === responseInfo.status) &&
-            typeof responseInfo.validationErrors === "string"
-        ) {
-            return (
-                <ErrorMessage className="error-message">
-                    {responseInfo.validationErrors}
-                </ErrorMessage>
-            );
-        } else if (
-            ("acceptance_missing" === responseInfo.status) &&
-            typeof responseInfo.validationErrors === "string"
-        ) {
-            return (
-                <ErrorMessage className="error-message">
-                    {responseInfo.validationErrors}
-                </ErrorMessage>
-            );
-        } else {
-            return "";
-        }
-    };
+	/**
+	 * Get the error or success message
+	 *
+	 * @return {string|*}
+	 */
+	const getMessage = () => {
+		if (
+			'sent' === responseInfo.status &&
+			typeof responseInfo.message === 'string'
+		) {
+			return (
+				<SuccessMessage className="success-message">
+					{responseInfo.message}
+				</SuccessMessage>
+			);
+		} else if (
+			'failed' === responseInfo.status &&
+			typeof responseInfo.validationErrors === 'string'
+		) {
+			return (
+				<ErrorMessage className="error-message">
+					{responseInfo.validationErrors}
+				</ErrorMessage>
+			);
+		} else if (
+			'acceptance_missing' === responseInfo.status &&
+			typeof responseInfo.validationErrors === 'string'
+		) {
+			return (
+				<ErrorMessage className="error-message">
+					{responseInfo.validationErrors}
+				</ErrorMessage>
+			);
+		} else {
+			return '';
+		}
+	};
 
-    return getMessage();
+	return getMessage();
 };
 
 const SuccessMessage = styled.div`
-    border: 2px solid #398f14;
-    padding: 0.75rem 1.25rem;
+	border: 2px solid #398f14;
+	padding: 0.75rem 1.25rem;
 `;
 
 const ErrorMessage = styled.div`
-    border: 2px solid #ff2c18;
-    padding: 0.75rem 1.25rem;
+	border: 2px solid #ff2c18;
+	padding: 0.75rem 1.25rem;
 `;
 
 export default connect(Message);

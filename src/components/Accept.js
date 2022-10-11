@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from "react";
-import FormIdContext from "../context/FormIdContext";
-import { connect } from "frontity";
+import React, { useContext, useEffect } from 'react';
+import FormIdContext from '../context/FormIdContext';
+import { connect } from 'frontity';
 
 /**
  * Input Component.
@@ -11,51 +11,54 @@ import { connect } from "frontity";
  * @return {*}
  */
 const cf7Accept = ({ state, actions, inputProps }) => {
-    // Context is used so that we can pass the form id to different components.
-    const id = useContext(FormIdContext);
-    const inputName = inputProps.name;
+	// Context is used so that we can pass the form id to different components.
+	const id = useContext(FormIdContext);
+	const inputName = inputProps.name;
 
-    if (true === state.cf7.resetOnChange) {
-        useEffect(() => {
-            actions.cf7.resetFields({ id })
-        }, [state.router.link])
-    }
+	if (true === state.cf7.resetOnChange) {
+		useEffect(() => {
+			actions.cf7.resetFields({ id });
+		}, [state.router.link]);
+	}
 
-    if ("undefined" === typeof state.cf7.forms[id].inputVals[inputName]) {
-        actions.cf7.changeInputValue({
-            id,
-            inputName,
-            value: 0,
-        });
-    }
+	if ('undefined' === typeof state.cf7.forms[id].inputVals[inputName]) {
+		actions.cf7.changeInputValue({
+			id,
+			inputName,
+			value: 0,
+		});
+	}
 
-    /**
-     * OnChange handler for input.
-     *
-     * @param {Object} event Event.
-     *
-     * @return {void}
-     */
-    const onChange = (event) => {
-        actions.cf7.changeInputValue({
-            id,
-            inputName,
-            value: (state.cf7.forms[id].inputVals[inputName] === "checked" ? 1 : "checked"),
-        });
-    };
+	/**
+	 * OnChange handler for input.
+	 *
+	 * @param {Object} event Event.
+	 *
+	 * @return {void}
+	 */
+	const onChange = (event) => {
+		actions.cf7.changeInputValue({
+			id,
+			inputName,
+			value:
+				state.cf7.forms[id].inputVals[inputName] === 'checked'
+					? 1
+					: 'checked',
+		});
+	};
 
-    return (
-        <input
-            name={inputProps.name}
-            className={inputProps.className}
-            id={inputProps.id}
-            aria-invalid={inputProps.ariaInvalid}
-            aria-required={inputProps.ariaRequired}
-            type={inputProps.type}
-            value={state.cf7.forms[id].inputVals[inputName]}
-            onChange={onChange}
-        />
-    );
+	return (
+		<input
+			name={inputProps.name}
+			className={inputProps.className}
+			id={inputProps.id}
+			aria-invalid={inputProps.ariaInvalid}
+			aria-required={inputProps.ariaRequired}
+			type={inputProps.type}
+			value={state.cf7.forms[id].inputVals[inputName]}
+			onChange={onChange}
+		/>
+	);
 };
 
 export default connect(cf7Accept);
