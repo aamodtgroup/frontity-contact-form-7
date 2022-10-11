@@ -1,6 +1,6 @@
-import React from "react";
-import FormIdContext from "../context/FormIdContext";
-import { connect } from "frontity";
+import React from 'react';
+import FormIdContext from '../context/FormIdContext';
+import { connect } from 'frontity';
 
 /**
  * HiddenInputs component
@@ -12,13 +12,13 @@ import { connect } from "frontity";
  * @return {*}
  */
 const HiddenInputs = ({ state, actions, inputProps }) => {
-    const id = React.useContext(FormIdContext);
-    const inputName = inputProps.name;
-    const inputValue = inputProps.value;
+	const id = React.useContext(FormIdContext);
+	const inputName = inputProps.name;
+	const inputValue = inputProps.value;
 
-    actions.cf7.addHiddenInputs({ id, inputName, value: inputValue });
+	actions.cf7.addHiddenInputs({ id, inputName, value: inputValue });
 
-    return null;
+	return null;
 };
 
 export default connect(HiddenInputs);
