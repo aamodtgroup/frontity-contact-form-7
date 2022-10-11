@@ -129,6 +129,7 @@ const MyForm = {
                         }, 5000);
                     } else if (
                         "validation_failed" === body.status ||
+                        "acceptance_missing" === body.status ||
                         "mail_failed" === body.status
                     ) {
                         if (body.invalid_fields) {

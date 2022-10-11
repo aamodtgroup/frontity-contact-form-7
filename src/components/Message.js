@@ -15,6 +15,7 @@ import FormIdContext from "./../context/FormIdContext";
 const Message = ({ state }) => {
     const id = React.useContext(FormIdContext);
     const responseInfo = state.cf7.forms[id];
+    console.log(responseInfo);
 
     /**
      * Get the error or success message
@@ -32,7 +33,16 @@ const Message = ({ state }) => {
                 </SuccessMessage>
             );
         } else if (
-            "failed" === responseInfo.status &&
+            ("failed" === responseInfo.status) &&
+            typeof responseInfo.validationErrors === "string"
+        ) {
+            return (
+                <ErrorMessage className="error-message">
+                    {responseInfo.validationErrors}
+                </ErrorMessage>
+            );
+        } else if (
+            ("acceptance_missing" === responseInfo.status) &&
             typeof responseInfo.validationErrors === "string"
         ) {
             return (
